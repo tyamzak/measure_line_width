@@ -1,67 +1,67 @@
-画像の直線幅の測定
+Measuring the linear width of an image
 
-[基本機能]
-入力ファイル：JPG(1600 X 1200)
-線の定義：暗い背景に明るい色の直線　もしくは明るい背景に暗い色の直線　垂直もしくは水平に存在
-線幅の定義：線の輪郭の上下差、もしくは左右差を言う
-測定結果の描画：頂いたファイルを参考に、画像上に測定結果の描画を行う
-測定結果の出力：CSV形式にて、[元画像ファイル名,出力画像ファイル名,縦横判定,白黒判定,線幅 X 10]を出力する
+[Basic functions]
+Input file: JPG (1600 X 1200)
+Line definition: a light-colored line on a dark background or a dark-colored line on a light background, either vertically or horizontally
+Line width definition: Vertical or horizontal difference of the line outline
+Drawing the measurement results: Draw the measurement results on the image using the file you received as a reference.
+Output measurement result: Output [original image file name, output image file name, vertical/horizontal judgment, black/white judgment, line width X 10] in CSV format.
 
-[使用方法]
+[How to use] 1.
 
-1.　環境構築
+1. environment setup
 
-requirements.txt　に従って、パッケージのインストールを行います。
+Install the package according to requirements.txt
 
 pip install -r requirements.text
 
-2. フォルダ構造の確認
+Check the folder structure
 
 
-before : 処理したい画像を入れるフォルダ
-after : 処理された画像及びcsvが入るフォルダ
-ipaexg00401 : IPAのフォントが入っているフォルダ
+before : Folder containing images to be processed
+after : Folder containing processed images and csv
+ipaexg00401 : Folder containing IPA fonts
 
-※注意　画像ファイルに制限があります。
+Note: There are restrictions on image files.
 
-- jpgファイル(拡張子が.jpgのもの)
-- 解像度 : 1600 X 1200
-- 名前が英数字記号のみ(日本語やギリシャ文字は使用できません)
+- jpg files (with .jpg extension)
+- Resolution : 1600 X 1200
+- Name must be alphanumeric symbols only (Japanese and Greek characters are not allowed)
 
-3.　プログラムの実行
+3. program execution
 
-python において実行します。
+Execute the program in python.
 
 python main.py
 
-実行ファイルの main.py は同じフォルダ内のbeforeフォルダとafterフォルダを探します。
-gipファイルを開いた状態で、動作できる状態になっています。
-誤って移動・削除してしまった場合でも、同名フォルダが存在すれば動作します。
+The executable main.py will look for the before and after folders in the same folder.
+The gip file is open and ready to run.
+Even if the file is accidentally moved or deleted, it will work if the folder with the same name exists.
 
-線の縦横、及び背景画像の明るさを判定して、処理を行います。
-処理された画像および処理結果のcsvがafterフォルダに入ります。
+The brightness of the background image and the height and width of the line are determined and processed.
+The processed image and the csv of the processed result are stored in the after folder.
 
-[うまく動かなかったら]
+[If it doesn't work]
 
-入力画像によっては、線がうまく認識されないかもしれません。
-背景画像の色によって、main関数内の以下の値を調整してみてください。
+Lines may not be recognized well depending on the input image.
+Try adjusting the following values in the main function according to the color of the background image.
 
 if __name__ == "__main__":
-    #背景白画像の際の、画像を二値化する際の境界値
+    #Boundary value for binarizing the image when the background image is white
     WHITE_BOUNDARY = 127
-    #背景黒画像の際の、画像を二値化する際の境界値
+    #Boundary value for binarizing an image with a black background
     BLACK_BOUNDARY = 40
     main(WHITE_BOUNDARY,BLACK_BOUNDARY)
 
 WHITE_BOUNDARY = 127
 
-背景白画像の際の、画像を二値化する際の境界値です。
-0~255の間で設定可能です。
-線が白っぽくて認識されない場合、この値を下げると認識されやすくなります。
+Boundary value for binarizing an image with a white background.
+The value can be set between 0~255.
+If the lines are too white to be recognized, lowering this value will make them easier to recognize.
 
 
 BLACK_BOUNDARY = 40
 
-背景黒画像の際の、画像を二値化する際の境界値です。
-0~255の間で設定可能です。
-線が黒っぽくて認識されない場合、この値を上げると認識されやすくなります。
+Boundary value for binarization of images with black background.
+The value can be set between 0 and 255.
+If the lines are too black to be recognized, increasing this value will make them easier to recognize.
