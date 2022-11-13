@@ -31,7 +31,7 @@ def find_rect_of_target_color(image, color_type)->list:
     # red detection
     if color_type == REDTAPE:
         mask = np.zeros(h.shape, dtype=np.uint8)
-        mask[((h < 20) | (h > 200)) & (s > 128)] = 255
+        mask[((h < 40) | (h > 200)) & (s > 40)] = 255
 
         
 
@@ -74,5 +74,5 @@ def find_rect_of_target_color(image, color_type)->list:
         rect = cv2.boundingRect(approx)
         rects.append(np.array(rect))
 
-    return len(contours)
+    return rects
     
